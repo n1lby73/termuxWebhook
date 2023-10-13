@@ -44,6 +44,22 @@ expose_with_serveo() {
     echo "$forwarded_url"
 }
 
+# Function to kill processes running on specified port
+
+kill_port_processes() {
+
+    local port="$1"
+    local pids=$(lsof -ti :$port)
+
+    if [ -n "$pids" ]; then
+
+        echo "Killing processes on port $port: $pids"
+        kill -9 $pids
+
+    fi
+
+}
+
 # Paths to virtual environment activation scripts
 
 webhook_venv="$HOME/termuxWebhook/termuxenv/bin/activate"
@@ -57,6 +73,7 @@ cd "$HOME/termuxWebhook"
 export FLASK_APP=run.py
 export FLASK_DEBUG=True
 
+kill_port_processes 4962
 run_flask_app_background 4962
 
 # Expose the Webhook server with Serveo
@@ -73,6 +90,7 @@ cd "$HOME/industrial-IOT/web-ui"
 export FLASK_APP=run.py
 export FLASK_DEBUG=True
 
+kill_port_processes 5000
 run_flask_app_background 5000
 
 # Expose the IIOT server with Serveo
