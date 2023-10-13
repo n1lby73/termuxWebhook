@@ -19,7 +19,7 @@ if len(sys.argv) != 3:
 webhook_url = sys.argv[1]
 iiot_url = sys.argv[2]
 
-message = f"Android reboot detected and servers started.\n\nNew URLs are:\n\nnWebhook - {webhook_url}\nIIOT - {iiot_url}"
+message = f"Android reboot detected and servers started.\n\nNew URLs are:\n\nWebhook - {webhook_url}\nIIOT - {iiot_url}"
 
 for chatid in chatids:
 
