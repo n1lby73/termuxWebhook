@@ -55,7 +55,7 @@ def sendToTelegram(chatid, message):
 
         print(e)
 
-class push(Resource):
+class pull(Resource):
 
     def post(self):
         
@@ -95,4 +95,4 @@ class push(Resource):
                 
             return str(e), 403
 
-api.add_resource(push, '/api/push')
+api.add_resource(pull, '/api/pull')
