@@ -41,4 +41,4 @@ echo "IIOT server: $IIOTurl"
 
 # Pass the URLs to a Python script
 
-telegram.py "$webHookurl" "$IIOTurl"
+pyhton ~/termuxWebhook/telegram.py "$webHookurl" "$IIOTurl"
