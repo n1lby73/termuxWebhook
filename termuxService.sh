@@ -14,7 +14,7 @@ activate_venv() {
 run_flask_app_background() {
     
     local port="$1"
-    nohup flask run --port "$port" </dev/null >/dev/null 2>&1 &
+    nohup flask run --port "$port" </dev/null >flask.log 2>&1 &
 
     if [ $? -ne 0 ]; then
 
@@ -31,7 +31,7 @@ expose_with_serveo() {
     local local_port="$1"
     local serveo_port="$2"
 
-    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net)
+    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net) </dev/null >portfoward.log 2>&1 &
     forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
 
     if [ $? -ne 0 ]; then
