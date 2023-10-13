@@ -33,7 +33,7 @@ expose_with_serveo() {
 
     local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net)
     forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
-    
+
     if [ $? -ne 0 ]; then
 
         echo "Failed to expose server on port $local_port with Serveo"
@@ -41,7 +41,7 @@ expose_with_serveo() {
 
     fi
 
-    echo "$serveo_url"
+    echo "$forwarded_url"
 }
 
 # Paths to virtual environment activation scripts
