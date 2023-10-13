@@ -14,7 +14,7 @@ activate_venv() {
 run_flask_app_background() {
     
     local port="$1"
-    nohup flask run --port "$port" </dev/null >flask.log 2>&1 &
+    nohup flask run --port "$port" &> flask_log.txt &
 
     if [ $? -ne 0 ]; then
 
@@ -31,17 +31,19 @@ expose_with_serveo() {
     local local_port="$1"
     local serveo_port="$2"
 
-    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net) </dev/null >portfoward.log 2>&1 &
-    forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
+    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net) &> serveo_log.txt &
 
     if [ $? -ne 0 ]; then
 
         echo "Failed to expose server on port $local_port with Serveo"
         exit 1
 
-    fi
+    else
 
-    echo "$forwarded_url"
+        forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
+        echo "$forwarded_url"
+
+    fi
 }
 
 # Function to kill processes running on specified port
