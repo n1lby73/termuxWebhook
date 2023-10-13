@@ -3,7 +3,7 @@
 # Paths to virtual environment activation scripts
 
 webhook_venv="$HOME/termuxWebhook/termuxenv/bin/activate"
-IIOT_venv="$HOME/industrial-IOT/iitenv/bin/activate"
+IIOT_venv="$HOME/industrial-IOT/web-ui/iitenv/bin/activate"
 
 # Start the Webhook server locally
 
