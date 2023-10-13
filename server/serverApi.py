@@ -13,8 +13,8 @@ import os
 load_dotenv()
 
 chatids = os.getenv('chatID', '').split(',')
-# webhook_secret = os.getenv('GITHUB_WEBHOOK_SECRET')
-webhook_secret = "mehniambroke"
+webhook_secret = os.getenv('GITHUB_WEBHOOK_SECRET')
+
 def verify_signature(payload_body, secret_token, signature_header):
 
     if not signature_header:
@@ -66,7 +66,7 @@ class push(Resource):
             
             # Read the raw request data
             payload_body = request.data.decode('utf-8')
-            
+
             # Verify the GitHub Webhook payload
             verify_signature(payload_body, webhook_secret, signature_header)
             
