@@ -14,7 +14,7 @@ activate_venv() {
 run_flask_app_background() {
     
     local port="$1"
-    nohup flask run --port "$port" &
+    nohup flask run --port "$port" </dev/null >/dev/null 2>&1 &
 
     if [ $? -ne 0 ]; then
 
