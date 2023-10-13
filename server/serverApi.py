@@ -87,7 +87,7 @@ class pull(Resource):
         
         except Exception as e :
 
-            errorMsg = "An unauthorized client made a request to your termux webhook"
+            errorMsg = f"An unauthorized client made a request to your termux webhook and error is:\n{e}"
             
             for chatid in chatids:
 
