@@ -116,7 +116,7 @@ activate_venv() {
     source "$venv_path" || { echo "Failed to activate virtual environment: $venv_path"; exit 1; }
 }
 
-# Function to run a Flask application in a tmux session
+# Function to run a Flask application in the background using tmux
 run_flask_app_tmux() {
     local session_name="$1"
     local port="$2"
@@ -144,7 +144,7 @@ expose_with_serveo() {
     fi
 }
 
-# Function to kill processes running on specified port
+# Function to kill processes running on a specified port
 kill_port_processes() {
     local port="$1"
     local pids=$(lsof -ti :$port)
@@ -159,7 +159,7 @@ kill_port_processes() {
 webhook_venv="$HOME/termuxWebhook/termuxenv/bin/activate"
 IIOT_venv="$HOME/industrial-IOT/web-ui/iitenv/bin/activate"
 
-# Start the Webhook server in a tmux session
+# Start the Webhook server in the background using tmux
 activate_venv "$webhook_venv"
 cd "$HOME/termuxWebhook"
 export FLASK_APP=run.py
@@ -172,7 +172,7 @@ run_flask_app_tmux "webhook_server" 4962
 webHookurl=$(expose_with_serveo 4962 80)
 echo "Webhook: $webHookurl"
 
-# Start the IIOT server in a tmux session
+# Start the IIOT server in the background using tmux
 activate_venv "$IIOT_venv"
 cd "$HOME/industrial-IOT/web-ui"
 export FLASK_APP=run.py
