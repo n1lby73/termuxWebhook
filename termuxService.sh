@@ -267,10 +267,11 @@ export FLASK_APP=run.py
 export FLASK_DEBUG=True
 
 kill_port_processes 4962
+echo "starting webhook"
 run_flask_app_background 4962
 
 # Expose the Webhook server with Serveo
-
+echo "starting pf webhook"
 webHookurl=$(expose_with_serveo 4962 80)
 
 echo "Webhook: $webHookurl"
@@ -284,10 +285,11 @@ export FLASK_APP=run.py
 export FLASK_DEBUG=True
 
 kill_port_processes 5000
+echo "starting app"
 run_flask_app_background 5000
 
 # Expose the IIOT server with Serveo
-
+echo "starting pf app"
 IIOTurl=$(expose_with_serveo 5000 4962)
 
 echo "IIOT server: $IIOTurl"
