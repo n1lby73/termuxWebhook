@@ -222,8 +222,7 @@ expose_with_serveo() {
     local local_port="$1"
     local serveo_port="$2"
 
-    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net) > /dev/null 2>&1 &
-
+    local serveo_url=$(ssh -R "$serveo_port:localhost:$local_port" serveo.net 2>/dev/null | grep -o 'from [^ ]*' | awk '{print $2}') > /dev/null 2>&1 &
     if [ $? -ne 0 ]; then
 
         echo "Failed to expose server on port $local_port with Serveo"
@@ -231,7 +230,8 @@ expose_with_serveo() {
 
     else
 
-        forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
+        # forwarded_url=$(echo "$serveo_url" | grep -o 'from [^ ]*' | awk '{print $2}')
+        forwarded_url=$(echo "$serveo_url" )
         echo "$forwarded_url"
 
     fi
